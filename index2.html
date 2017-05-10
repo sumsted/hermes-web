@@ -59,25 +59,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="static/bs/js/bootstrap.min.js"></script>
     <!--<script src="static/app/app.js"></script>-->
-    <script src="static/app/OpenLayer.js"></script>
     <script>
-        map = new OpenLayers.Map("hermesland");
-        map.addLayer(new OpenLayers.Layer.OSM());
-
-        var lonLat = new OpenLayers.LonLat( -89.722230 ,35.036146 )
-              .transform(
-                new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-                map.getProjectionObject() // to Spherical Mercator Projection
-              );
-
-        var zoom=16;
-
-        var markers = new OpenLayers.Layer.Markers( "Markers" );
-        map.addLayer(markers);
-
-        markers.addMarker(new OpenLayers.Marker(lonLat));
-
-        map.setCenter (lonLat, zoom);
+      function initMap() {
+        var uluru = {lat: 35.036132, lng: -89.722389};
+        var map = new google.maps.Map(document.getElementById('hermesland'), {
+          zoom: 18,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
     </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHB83timRxeGmn1GsvrrxokW_6-mTxFUc&callback=initMap"></script>
 </body>
 </html>
